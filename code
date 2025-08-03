@@ -1,0 +1,25 @@
+int pirPin = 2;       // حساس الحركة
+int buzzerPin = 8;    // المنبه الصوتي
+int ledPin = 13;      // LED للتنبيه البصري
+
+void setup() {
+  pinMode(pirPin, INPUT);
+  pinMode(buzzerPin, OUTPUT);
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int motionDetected = digitalRead(pirPin);
+
+  if (motionDetected == HIGH) {
+    Serial.println("🚨 حركة مكتشفة!");
+    digitalWrite(buzzerPin, HIGH);
+    digitalWrite(ledPin, HIGH);
+  } else {
+    digitalWrite(buzzerPin, LOW);
+    digitalWrite(ledPin, LOW);
+  }
+
+  delay(200); // تأخير بسيط لتقليل التذبذب
+}
